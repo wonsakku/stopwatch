@@ -36,4 +36,21 @@ public class TimeMeasurement {
         }
         return compareTime(this.endTime);
     }
+
+    public MeasuringStatus nextMeasuringStatus() {
+
+        if(this.measuringStatus == MeasuringStatus.STUDY){
+            return MeasuringStatus.BREAK;
+        }
+
+        if(this.measuringStatus == MeasuringStatus.BREAK){
+            return MeasuringStatus.STUDY;
+        }
+
+        throw new RuntimeException();
+    }
+
+    public boolean isMeasuringEnd() {
+        return this.endTime != null;
+    }
 }
