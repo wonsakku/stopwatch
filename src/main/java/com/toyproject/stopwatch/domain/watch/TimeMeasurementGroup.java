@@ -35,12 +35,12 @@ public class TimeMeasurementGroup {
         return this.timeMeasurements.size();
     }
 
-    public LocalTime getTotalStudyTime(LocalDateTime checkTime) {
+    public Duration getTotalStudyTime(LocalDateTime checkTime) {
         final List<TimeMeasurement> studyMeasurements = this.timeMeasurements.stream()
                 .filter(measurement -> measurement.getMeasuringStatus() == MeasuringStatus.STUDY)
                 .collect(Collectors.toList());
 
-        List<LocalTime> measuredTimes = new ArrayList<>();
+        List<Duration> measuredTimes = new ArrayList<>();
         for (TimeMeasurement studyMeasurement : studyMeasurements) {
             if(studyMeasurement.isMeasuringEnd()){
                 measuredTimes.add(studyMeasurement.getTotalTime());
@@ -49,11 +49,8 @@ public class TimeMeasurementGroup {
             }
         }
 
-        final Duration sumDuration = measuredTimes.stream()
-                .map(localTime -> Duration.between(LocalTime.MIDNIGHT, localTime))
+        return measuredTimes.stream()
                 .reduce(Duration.ZERO, Duration::plus);
-
-        return LocalTime.ofSecondOfDay(sumDuration.getSeconds());
     }
 }
 

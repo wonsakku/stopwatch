@@ -28,10 +28,10 @@ class TimeMeasurementTest {
         final TimeMeasurement timeMeasurement = new TimeMeasurement(startTime, MeasuringStatus.STUDY);
 
         // when
-        LocalTime localTime = timeMeasurement.compareTime(targetTime);
+        Duration localTime = timeMeasurement.compareTime(targetTime);
 
         // then
-        assertThat(localTime).isEqualTo(LocalTime.of(2, 58, 55));
+        assertThat(localTime).isEqualTo(Duration.ofHours(2).plusMinutes(58).plusSeconds(55));
     }
 
     @Test
@@ -44,10 +44,10 @@ class TimeMeasurementTest {
 
         // when
         timeMeasurement.endMeasuring(endTime);
-        LocalTime totalTime = timeMeasurement.getTotalTime();
+        Duration totalTime = timeMeasurement.getTotalTime();
 
         // then
-        assertThat(totalTime).isEqualTo(LocalTime.of(2, 58, 55));
+        assertThat(totalTime).isEqualTo(Duration.ofHours(2).plusMinutes(58).plusSeconds(55));
     }
 
 

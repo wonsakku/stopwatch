@@ -2,6 +2,8 @@ package com.toyproject.stopwatch.domain.watch;
 
 import lombok.Getter;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -20,9 +22,9 @@ public class TimeMeasurement {
     }
 
 
-    public LocalTime compareTime(LocalDateTime targetTime) {
-        final long secondsTerm = ChronoUnit.SECONDS.between(this.startTime, targetTime);
-        return LocalTime.ofSecondOfDay(secondsTerm);
+    public Duration compareTime(LocalDateTime targetTime) {
+//        final long secondsTerm = ChronoUnit.SECONDS.between(this.startTime, targetTime);
+        return Duration.between(this.startTime, targetTime);
     }
 
     public void endMeasuring(LocalDateTime endTime){
@@ -30,7 +32,7 @@ public class TimeMeasurement {
     }
 
 
-    public LocalTime getTotalTime() {
+    public Duration getTotalTime() {
         if(this.endTime == null){
             throw new IllegalStateException("시간 측정이 종료되지 않았습니다.");
         }

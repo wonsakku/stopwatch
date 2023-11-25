@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -52,10 +53,10 @@ class TimeMeasurementGroupTest {
 
         // when
         final LocalDateTime checkTime = LocalDateTime.of(2023, 11, 18, 17, 30, 30);
-        final LocalTime totalStudyTime = timeMeasurementGroup.getTotalStudyTime(checkTime);
+        final Duration totalStudyTime = timeMeasurementGroup.getTotalStudyTime(checkTime);
 
         // then
-        Assertions.assertThat(totalStudyTime).isEqualTo(LocalTime.of(4, 46, 15));
+        Assertions.assertThat(totalStudyTime).isEqualTo(Duration.ofHours(4).plusMinutes(46).plusSeconds(15));
     }
 
 
